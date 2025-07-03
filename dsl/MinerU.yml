@@ -2,8 +2,8 @@ app:
   description: ''
   icon: 🤖
   icon_background: '#FFEAD5'
-  mode: workflow
-  name: '11'
+  mode: advanced-chat
+  name: mineru test
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
@@ -17,19 +17,13 @@ workflow:
   environment_variables: []
   features:
     file_upload:
-      allowed_file_extensions:
-      - .JPG
-      - .JPEG
-      - .PNG
-      - .GIF
-      - .WEBP
-      - .SVG
+      allowed_file_extensions: []
       allowed_file_types:
-      - image
+      - document
       allowed_file_upload_methods:
-      - local_file
       - remote_url
-      enabled: false
+      - local_file
+      enabled: true
       fileUploadConfig:
         audio_file_size_limit: 50
         batch_count_limit: 5
@@ -61,26 +55,61 @@ workflow:
   graph:
     edges:
     - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1744967993601'
+        sourceType: iteration-start
+        targetType: code
+      id: 1744967993601start-source-1744968005646-target
+      source: 1744967993601start
+      sourceHandle: source
+      target: '1744968005646'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
         isInIteration: false
         isInLoop: false
-        sourceType: start
-        targetType: tool
-      id: 1751548070751-source-1751553629165-target
-      source: '1751548070751'
+        sourceType: iteration
+        targetType: answer
+      id: 1744967993601-source-1744968094127-target
+      source: '1744967993601'
       sourceHandle: source
-      target: '1751553629165'
+      target: '1744968094127'
       targetHandle: target
       type: custom
       zIndex: 0
     - data:
         isInIteration: false
         isInLoop: false
-        sourceType: tool
-        targetType: end
-      id: 1751553629165-source-1751554193986-target
-      source: '1751553629165'
+        sourceType: start
+        targetType: tool
+      id: 1744785564443-source-1751554841935-target
+      source: '1744785564443'
       sourceHandle: source
-      target: '1751554193986'
+      target: '1751554841935'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: answer
+      id: 1751554841935-source-1744958922275-target
+      source: '1751554841935'
+      sourceHandle: source
+      target: '1744958922275'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: iteration
+      id: 1751554841935-source-1744967993601-target
+      source: '1751554841935'
+      sourceHandle: source
+      target: '1744967993601'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -90,27 +119,155 @@ workflow:
         selected: false
         title: 开始
         type: start
-        variables:
-        - allowed_file_extensions: []
-          allowed_file_types:
-          - document
-          allowed_file_upload_methods:
-          - local_file
-          - remote_url
-          label: tt
-          max_length: 48
-          options: []
-          required: true
-          type: file
-          variable: tt
-      height: 89
-      id: '1751548070751'
+        variables: []
+      height: 53
+      id: '1744785564443'
       position:
         x: 30
         y: 322.5
       positionAbsolute:
         x: 30
         y: 322.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: 'markdown:{{#1751554841935.text#}}
+
+
+          extra_format:{{#1751554841935.files#}}
+
+
+          full_zip_url :{{#1751554841935.full_zip_url#}}
+
+
+
+          '
+        desc: ''
+        selected: false
+        title: Answer 2
+        type: answer
+        variables: []
+      height: 158
+      id: '1744958922275'
+      position:
+        x: 770
+        y: 322.5
+      positionAbsolute:
+        x: 770
+        y: 322.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 254
+        is_parallel: false
+        iterator_input_type: array[object]
+        iterator_selector:
+        - '1751554841935'
+        - images
+        output_selector:
+        - '1744968005646'
+        - url
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1744967993601start
+        title: Iteration
+        type: iteration
+        width: 508
+      height: 254
+      id: '1744967993601'
+      position:
+        x: 638
+        y: 520.5
+      positionAbsolute:
+        x: 638
+        y: 520.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 508
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1744967993601start
+      parentId: '1744967993601'
+      position:
+        x: 60
+        y: 62.5
+      positionAbsolute:
+        x: 698
+        y: 583
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "\ndef main(arg1: object) -> dict:\n        return {\n        \"url\"\
+          : arg1[\"preview_url\"].replace(\"api:5001\",\"localhost\"),\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1744967993601'
+        outputs:
+          url:
+            children: null
+            type: string
+        selected: false
+        title: Code
+        type: code
+        variables:
+        - value_selector:
+          - '1744967993601'
+          - item
+          variable: arg1
+      height: 53
+      id: '1744968005646'
+      parentId: '1744967993601'
+      position:
+        x: 204
+        y: 60
+      positionAbsolute:
+        x: 842
+        y: 580.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        answer: images_url:{{#1744967993601.output#}}
+        desc: ''
+        selected: false
+        title: Answer 2
+        type: answer
+        variables: []
+      height: 120
+      id: '1744968094127'
+      position:
+        x: 1206
+        y: 568.5
+      positionAbsolute:
+        x: 1206
+        y: 568.5
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -402,7 +559,7 @@ workflow:
           enable_formula: 1
           enable_ocr: 0
           enable_table: 1
-          extra_formats: '[]'
+          extra_formats: '["html","docx"]'
           language: auto
           layout_model: doclayout_yolo
           parse_method: auto
@@ -413,11 +570,11 @@ workflow:
           file:
             type: variable
             value:
-            - '1751548070751'
-            - tt
+            - sys
+            - files
         type: tool
       height: 245
-      id: '1751553629165'
+      id: '1751554841935'
       position:
         x: 334
         y: 322.5
@@ -429,30 +586,7 @@ workflow:
       targetPosition: left
       type: custom
       width: 244
-    - data:
-        desc: ''
-        outputs:
-        - value_selector:
-          - '1751553629165'
-          - text
-          value_type: string
-          variable: text
-        selected: true
-        title: 结束
-        type: end
-      height: 89
-      id: '1751554193986'
-      position:
-        x: 638
-        y: 322.5
-      positionAbsolute:
-        x: 638
-        y: 322.5
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 244
     viewport:
-      x: 270.99999999999994
-      y: -9
-      zoom: 0.7
+      x: 73.93340532698642
+      y: 61.88119364942901
+      zoom: 0.5305007982786393

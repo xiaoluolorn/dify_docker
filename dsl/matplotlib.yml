@@ -5,8 +5,13 @@ app:
   mode: advanced-chat
   name: matplotlib
   use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: bowenliang123/base64_codec:0.4.0@886cc78123c7d3f32f2f836ae2926bd8a6a0a93cb21f72409f8ca01c9d0104bd
 kind: app
-version: 0.1.3
+version: 0.3.0
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -68,12 +73,25 @@ workflow:
       zIndex: 0
     - data:
         isInIteration: false
+        isInLoop: false
         sourceType: code
-        targetType: answer
-      id: 1732083953925-source-answer-target
+        targetType: tool
+      id: 1732083953925-source-1751262651290-target
       source: '1732083953925'
       sourceHandle: source
-      target: answer
+      target: '1751262651290'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: answer
+      id: 1751262651290-source-1751262693650-target
+      source: '1751262651290'
+      sourceHandle: source
+      target: '1751262693650'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -88,32 +106,10 @@ workflow:
       id: '1732083938374'
       position:
         x: 30
-        y: 251.5
+        y: 252.5
       positionAbsolute:
         x: 30
-        y: 251.5
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 244
-    - data:
-        answer: '![描述文本](data:image/png;base64,{{#1732083953925.result#}})
-
-          '
-        desc: ''
-        selected: false
-        title: 直接回复
-        type: answer
-        variables: []
-      height: 119
-      id: answer
-      position:
-        x: 638
-        y: 251.5
-      positionAbsolute:
-        x: 638
-        y: 251.5
+        y: 252.5
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -140,7 +136,7 @@ workflow:
           result:
             children: null
             type: string
-        selected: true
+        selected: false
         title: 代码执行
         type: code
         variables: []
@@ -148,16 +144,128 @@ workflow:
       id: '1732083953925'
       position:
         x: 334
-        y: 251.5
+        y: 252.5
       positionAbsolute:
         x: 334
-        y: 251.5
+        y: 252.5
       selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Base64 encoded image string, default convert to PNG, support PNG
+              ("data:image/png;base64" prefix) and JPG ("data:image/jpeg;base64" prefix)
+            ja_JP: Base64 encoded image string, default convert to PNG, support PNG
+              ("data:image/png;base64" prefix) and JPG ("data:image/jpeg;base64" prefix)
+            pt_BR: Base64 encoded image string, default convert to PNG, support PNG
+              ("data:image/png;base64" prefix) and JPG ("data:image/jpeg;base64" prefix)
+            zh_Hans: Base64 编码的图片字符串，默认转为PNG格式，支持PNG格式（data:image/png;base64开头）及JPG格式（data:image/jpeg;base64开头）
+          label:
+            en_US: Base64 encoded Text
+            ja_JP: Base64 encoded Text
+            pt_BR: Base64 encoded Text
+            zh_Hans: 已 Base64 编码的图片字符串
+          llm_description: A tool for decoding Base64-encoded text to image file
+          max: null
+          min: null
+          name: encoded_text
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Filename of the output file
+            ja_JP: Filename of the output file
+            pt_BR: Filename of the output file
+            zh_Hans: 输出文件名
+          label:
+            en_US: Filename of the output file
+            ja_JP: Filename of the output file
+            pt_BR: Filename of the output file
+            zh_Hans: 输出文件名
+          llm_description: ''
+          max: null
+          min: null
+          name: output_filename
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          encoded_text: ''
+          output_filename: ''
+        provider_id: bowenliang123/base64_codec/base64_codec
+        provider_name: bowenliang123/base64_codec/base64_codec
+        provider_type: builtin
+        selected: false
+        title: Base64 文本 转 图片
+        tool_configurations: {}
+        tool_description: 将 Base64 编码文本转为 图片文件
+        tool_label: Base64 文本 转 图片
+        tool_name: base64_image_decoder
+        tool_parameters:
+          encoded_text:
+            type: mixed
+            value: '{{#1732083953925.result#}}'
+          output_filename:
+            type: mixed
+            value: pic
+        type: tool
+      height: 54
+      id: '1751262651290'
+      position:
+        x: 638
+        y: 252.5
+      positionAbsolute:
+        x: 638
+        y: 252.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '图片：
+
+
+          {{#1751262651290.files#}}'
+        desc: ''
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 105
+      id: '1751262693650'
+      position:
+        x: 942
+        y: 252.5
+      positionAbsolute:
+        x: 942
+        y: 252.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
     viewport:
-      x: 120.00000000000006
-      y: 238.30000000000004
+      x: 368
+      y: 135.99999999999994
       zoom: 0.7
